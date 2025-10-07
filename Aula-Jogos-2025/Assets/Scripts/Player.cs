@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Vector2 posicaoInicial;
+    public GameManager gameManager;
+
     public Animator anim;
     private Rigidbody2D rigd;
     public float speed;
@@ -14,12 +17,18 @@ public class Player : MonoBehaviour
     {
         anim=GetComponent<Animator>();
         rigd=GetComponent<Rigidbody2D>();
+        posicaoInicial = transform.position;
     }
 
     void Update()
     {
         Move();
         Jump();
+    }
+
+    public void ReiniciarPosicao()
+    {
+        transform.position = posicaoInicial;
     }
 
     void Move()
@@ -47,7 +56,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.W) && isGround == true)
+        if (Input.GetKeyDown(KeyCode.Space) && isGround == true)
         {
             rigd.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             anim.SetInteger("transitions", 2);
@@ -60,7 +69,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "tagGround")
         {
             isGround = true;
-            Debug.Log("ta funfando");
+            //Debug.Log("ta funfando");
         }
     }
 }

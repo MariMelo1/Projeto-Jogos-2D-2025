@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameManager gameManager;
     void Start()
     {
         
@@ -18,7 +18,8 @@ public class Coins : MonoBehaviour
     {
         if (colisao.CompareTag("Player"))
         {
-            Debug.Log("colidiu!");
+            gameManager.AddPontos(10);
+            Destroy(gameObject);
         }
     }
 
